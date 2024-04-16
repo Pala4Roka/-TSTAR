@@ -1,5 +1,5 @@
 import sys
-from PyQt5.QtCore import Qt  # Add this import statement
+from PyQt5.QtCore import Qt  
 import cv2
 import numpy as np
 from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel, QPushButton, QFileDialog
@@ -38,32 +38,31 @@ class GenderDetector(QWidget):
                     self.detect_gender(file_path)
 
     def detect_gender(self, file_path):
-        # Load the cascade classifier for face detection
+        # Загружает каскадный классификатор для распознавания лиц
         face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
 
-        # Read the image
+        # Считывание изображения
         img = cv2.imread(file_path)
 
-        # Convert image to grayscale
+        # Преобразование изображения в оттенки серого
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-        # Detect faces in the image
+        # Распознавание лиц на изображении
         faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
 
-        # Check if face(s) detected
+        # Проверка, обнаружено ли лицо (лица)
         if len(faces) > 0:
-            # Assuming gender based on facial features
-            # You can improve this part using a machine learning model for gender detection
+           # Определение пола на основе черт лица
             gender = "Man" if len(faces) > 1 else "Woman"
 
-            # Display the result
+            # Вывод результатов
             self.display_result(file_path, gender)
         else:
             self.image_label.setText("No face detected in the image")
 
     def display_result(self, file_path, gender):
         self.image_label.setText(f"Detected gender: {gender}")
-        # Here you could save or display the image with the bounding box around the face
+        
 
 
 if __name__ == '__main__':
