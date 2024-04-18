@@ -11,14 +11,14 @@ class GenderDetector(QWidget):
         self.init_ui()
 
     def init_ui(self):
-        self.setWindowTitle("Gender Detection")
+        self.setWindowTitle("Детектор пола")
         self.setGeometry(100, 100, 400, 200)
 
         self.image_label = QLabel(self)
-        self.image_label.setText("Upload an image to detect gender")
+        self.image_label.setText("Загрузи штобь УзНаТб")
         self.image_label.setAlignment(Qt.AlignCenter)
 
-        self.upload_button = QPushButton("Upload Image", self)
+        self.upload_button = QPushButton("СюДа", self)
         self.upload_button.clicked.connect(self.upload_image)
 
         layout = QVBoxLayout()
@@ -62,7 +62,7 @@ class GenderDetector(QWidget):
                 # Display the result
                 self.display_result(file_path, gender)
             else:
-                self.image_label.setText("No face detected in the image")
+                self.image_label.setText("ти шо тут нет физиономии")
         except Exception as e:
             print(f"An error occurred: {e}")
 
@@ -73,11 +73,11 @@ class GenderDetector(QWidget):
             gender = self.detector.get([name])[0]['gender'] if name else "Unknown"
             return gender
         except Exception as e:
-            print(f"Error detecting gender: {e}")
+            print(f"Error: {e}")
             return "Unknown"
 
     def display_result(self, file_path, gender):
-        self.image_label.setText(f"Detected Gender: {gender}")
+        self.image_label.setText(f"Это : {gender}")
         # Here you can save or display the image with a bounding box around the face
 
     def extract_name_from_path(self, file_path):
